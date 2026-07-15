@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" x-data="{ dark: localStorage.getItem('theme')==='dark'||(!localStorage.getItem('theme')&&window.matchMedia('(prefers-color-scheme: dark)').matches), scrolled:false, mobileMenu:false, progress:0 }" :class="{'dark':dark}" x-init="$watch('dark',v=>localStorage.setItem('theme',v?'dark':'light'));window.addEventListener('scroll',()=>{scrolled=window.scrollY>20;progress=Math.min(100,Math.round((window.scrollY/(document.body.scrollHeight-window.innerHeight))*100));},{passive:true})" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <link rel="shortcut icon" type="image/png" href="assets/seo.png">
+
+  <title>SEO - Article</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap" rel="stylesheet"/>
+  
+ <script src="art.js/script1.js"></script>
+<link rel="stylesheet" href="css/art.css"/>
+</head>
+<body class="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 font-body antialiased">
+
+  <!-- Reading progress bar -->
+  <div class="progress-bar" :style="`width:${progress}%`" role="progressbar" :aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100" aria-label="Reading progress"></div>
+
+  <!-- NAV -->
+  <header class="fixed top-0.5 left-0 right-0 z-50 transition-all duration-300"
+    :class="scrolled?'bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md shadow-sm shadow-black/5':'bg-transparent'">
+    <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between" aria-label="Main navigation">
+      <a href="index.html" class="font-display font-bold text-xl tracking-tight z-10">
+        <span class="text-zinc-900 dark:text-white">san</span><span class="text-accent">Jay</span>
+      </a>
+      <ul class="hidden md:flex items-center gap-8 text-sm font-medium" role="list">
+        <li><a href="index.html#services" class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Services</a></li>
+        <li><a href="index.html#about" class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">About</a></li>
+        <li><a href="blog.html" class="nav-link text-accent font-medium">Blog</a></li>
+        <li><a href="index.html#contact" class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Contact</a></li>
+      </ul>
+      <div class="flex items-center gap-3">
+        <button @click="dark=!dark" class="w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" :aria-label="dark?'Light mode':'Dark mode'">
+          <svg x-show="!dark" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+          <svg x-show="dark" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"/></svg>
+        </button>
+        <a href="index.html#contact" class="hidden md:inline-flex items-center gap-2 btn-primary bg-accent text-white text-sm font-medium px-5 py-2 rounded-full hover:bg-accent-light transition-colors">Hire me →</a>
+        <button @click="mobileMenu=!mobileMenu" class="md:hidden w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800" aria-label="Toggle menu">
+          <svg x-show="!mobileMenu" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <svg x-show="mobileMenu" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </nav>
+    <div x-show="mobileMenu" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2" class="md:hidden bg-white dark:bg-zinc-950 border-t border-zinc-100 dark:border-zinc-900">
+      <ul class="flex flex-col px-6 py-4 gap-4 text-sm font-medium" role="list">
+        <li><a href="index.html#services" @click="mobileMenu=false" class="block text-zinc-700 dark:text-zinc-300">Services</a></li>
+        <li><a href="index.html#about" @click="mobileMenu=false" class="block text-zinc-700 dark:text-zinc-300">About</a></li>
+        <li><a href="blog.html" class="block text-accent font-medium">Blog</a></li>
+        <li><a href="index.html#contact" @click="mobileMenu=false" class="block text-zinc-700 dark:text-zinc-300">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ARTICLE HEADER -->
+    <article>
+      <header class="pt-32 pb-12 max-w-3xl mx-auto px-6">
+        <a href="index.html#blog" class="inline-flex items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400 hover:text-accent transition-colors mb-8">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+          Back to blog
+        </a>
+
+        <div class="flex items-center gap-3 mb-5">
+          <span class="text-xs bg-orange-50 dark:bg-zinc-800 text-accent border border-orange-200 dark:border-zinc-700 px-2.5 py-1 rounded-full">SEO</span>
+          <span class="text-xs text-zinc-400">July 10, 2026 · 20 min read</span>
+        </div>
+
+        <h1 class="font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white leading-tight mb-6">What is SEO and Why it's important</h1>
+
+        <p class="text-xl text-zinc-500 dark:text-zinc-400 leading-relaxed mb-8">SEO is stands for search engine optimixation. it is a process to optimize to your content to get organic results in search engines. It's the process of making your website more visible in search enginse like Google and AI systems.</p>
+
+        <!-- Author -->
+        <div class="flex items-center gap-4 py-6 border-t border-b border-zinc-100 dark:border-zinc-900">
+          <div class="photo-frame w-12 h-12 rounded-full shrink-0">
+            <img src="" alt="Sanjay" loading="lazy"/>
+          </div>
+          <div>
+            <p class="font-medium text-zinc-900 dark:text-white text-sm">Sanjay</p>
+            <p class="text-xs text-zinc-500">SEO specialist
+          </div>
+          <div class="ml-auto flex gap-3">
+            <a href="https://www.linkedin.com/in/sanjay-kumar-r-041307339" class="w-8 h-8 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 text-zinc-500 hover:text-accent hover:border-accent transition-colors" aria-label="Share on LinkedIn">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <!-- Hero image -->
+      <div class="max-w-4xl mx-auto px-6 mb-12">
+        <div class="photo-frame w-full h-72 md:h-96 rounded-2xl">
+          <img src="assets/slider-dec-v3.png" alt="SEO" loading="lazy"/>
+        </div>
+      </div>
+
+      <!-- Article content -->
+      <div class="max-w-3xl mx-auto px-6 pb-16 prose-article">
+
+        <h2>Why it's important</h2>
+        <p>Search Engine Optimization is the process of improving a website to increase its visibility in organic search results. It is vital because higher rankins drive highly- targeted, free organic traffic, build brand credibility, a directly lead mor leads and sales.</p>
+        <p>Most users never click past the first page of search results.Ranking higher ensure your prospects find you instead of your competitors.Websites at the top of organic search reaults are generally perceived by users as more authoritative and reiable.</p>
+
+        
+
+       <center><h2>Keyword Reasrch</h2></center> 
+        <div>
+        <p>Keyword research is a "fundamental SEO task" that involves identifying a popular and phrases people enter
+          into search engines.It involves analyzing search volume, ranking your difficulty, and search intent to optimize your content
+          do you can drive qualified, organic traffic to your website.
+        </p>
+        <p>    Keyword research providde valuable insight into the questions & problems and solutions for your target audience is searching in 
+          search engines. Targeting the right keywords with effective research is the first step of your SEO. 
+          Right keywords are organically produces a long- term traffic.
+        </p>
+        </div>
+
+        <center><h2>On-page SEO</h2></center>
+        <div>
+        <p>On-page SEO [also known as on-site SEO] refers to the practice of optimizing webpage to improve a website's search engine rankings and earn organic traffic.
+          On-page SEO is important because it helps search engines understand your website and it's content as well as identify whether it is relevant to a search's query.
+        </p>
+       <p>
+        Its optimization of individual webpage content and HTML source code to help them rank higher in search results.
+        It involves strategically placing keywordds, writing compelling titles and meta descriptions, using proper header tags, and ensure
+        a fast, mobile-friendly user experience.
+       </p>
+        <img src="assets/on-page seo.jpg">
+        <p>
+          Create a high-quality, relevant content that matches the search intent of your audience. Place your keyword in the URL slug, the H1 heading,
+          and a few H2/H3 subheadings, but avoid "keyword stuffing". Write click worthy descriptive titles & meta tags, organize your page structure
+          comperss a image file sizes to improve page speed. Keep URLs clean, short and user- Friendly.
+        </p>
+      </div>
+
+        <center><h2>Tecnical SEO</h2></center>
+        <div>
+        <p>Technical SEO involves optimizing your website's back-end infrastructure so search engines and AI systems can effciently crawl, render, index, and cite your content.
+           Technical SEO refers to website and server optimizations that help search engines spiders and index your site more effectively 
+           [to help improve organic rankings]
+        </p>
+        <p>
+          Without a solid technical foundation, your best content won't appear in search results or get cited in AI-generated answers, no matter how valuanle it is.
+          That means lost traffic, missed business opportunities, and fewer chances to be refernces when users turn to AI for answers.
+          Make sure serach engines can discover(crawl) and save(index) your site properly so your pages can rank in search results.
+          Check whether your site is indexed, as your site wont't show in search results if Google hasn't indexed it and to checking your indexing status
+          using Google Search Console(GSC) and Bing Webmaster tools(BWT).
+        </p>
+        <p>
+          <strong>Having a duplicate</strong>versions of your site can harm your SEO efforts because search engines view these as separate websites,
+          even though they display the same content. Use the HTTPS version as your primary URL then implement a <strong>301 permanent redirect</strong>
+          so users and search engines are forwarded to your preferred version.
+        </p>
+        <p>
+           Make sure your robots.txt file is accurately set up configure your "<strong>robots.txt</strong>" file to avoid blocking important
+           pages from being crawled. A robots.txt file is a text files that tells search engine crawlers which parts of your site they're allowed to access.
+        </p>
+        </div>
+
+       <center><h2>OFF-page SEO</h2></center>
+       <div>
+        <p>
+          Off-page SEO is the process of making high-quality backlinks for the website. off-page SEO refres to all actions taken outside of your website to improve its search engine
+          rankings and overall online authority. While on-page SEO focuses on optimizing your site's content, off-page SEO focuses on building reputation, trust, and credibility
+          through external signals, primarily backlinks, brand mentions, and social engagement.
+        </p>
+        <p>
+          <strong>Link Building</strong>earning from other reputable, relevant website to your is the biggest ranking factor. Search engines view These
+          links as "votes of confidence". You can earn links through broken-link building, the Skyscraper technique, and creating highly shareable assets.
+        </p>
+
+        <p>
+          <strong>Guset Blogging</strong> Write a articles for authoritative industry blogs allows you to showcase your expertise add secure a valuable backlink(usually in your author bio or contextual link)
+          to you site.<strong>Digital PR</strong>pitching you brand to journalist or outlets to get featured in industry roudups or
+          news articles can land you highly powerful, high-authority backlinks.
+        </p>
+        </div>
+        <p><em>If this was helpful, share it with your Friends. 🧡</em></p>
+
+      </div>
+    </article>
+  </main>
+
+  <footer class="border-t border-zinc-100 dark:border-zinc-900">
+    <div class="max-w-6xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-sm text-zinc-400">© <span id="yr"></span><br> Developed by <strong>Sanjay</strong>
+    </div>
+  </footer>
+
+  <script src="art.js/script2.js"></script>
+  
+</body>
+</html>
